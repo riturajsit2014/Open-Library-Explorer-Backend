@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package loan;
+
+import "book.proto";
+import "member.proto";
+
+// Loan message definition
+message Loan {
+  string id = 1;
+  string book_id = 2;
+  string member_id = 3;
+  string loan_date = 4;
+  string due_date = 5;
+  string return_date = 6;
+  string status = 7;
+  book.Book book = 8;
+  member.Member member = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+// Create loan request
+message CreateLoanRequest {
+  string book_id = 1;
+  string member_id = 2;
+  string loan_date = 3;
+  string due_date = 4;
+}
+
+// Update loan request
+message UpdateLoanRequest {
+  string id = 1;
+  string return_date = 2;
+  string status = 3;
+}
+
+// Get loan request
+message GetLoanRequest {
+  string id = 1;
+}
+
+// List loans request
+message ListLoansRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string member_id = 3;
+  string book_id = 4;
+  string status = 5;
+}
+
+// List loans response
+message ListLoansResponse {
+  repeated Loan loans = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+// Delete loan request
+message DeleteLoanRequest {
+  string id = 1;
+}
+
+// Empty response
+message Empty {}
+
+// Loan service definition
+service LoanService {
+  rpc CreateLoan(CreateLoanRequest) returns (Loan);
+  rpc GetLoan(GetLoanRequest) returns (Loan);
+  rpc ListLoans(ListLoansRequest) returns (ListLoansResponse);
+  rpc UpdateLoan(UpdateLoanRequest) returns (Loan);
+  rpc DeleteLoan(DeleteLoanRequest) returns (Empty);
+} 

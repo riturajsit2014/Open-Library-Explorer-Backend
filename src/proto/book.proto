@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package book;
+
+// Book message definition
+message Book {
+  string id = 1;
+  string title = 2;
+  string author = 3;
+  string isbn = 4;
+  string publisher = 5;
+  int32 publication_year = 6;
+  string genre = 7;
+  string description = 8;
+  int32 total_copies = 9;
+  int32 available_copies = 10;
+  string location = 11;
+  string created_at = 12;
+  string updated_at = 13;
+}
+
+// Create book request
+message CreateBookRequest {
+  string title = 1;
+  string author = 2;
+  string isbn = 3;
+  string publisher = 4;
+  int32 publication_year = 5;
+  string genre = 6;
+  string description = 7;
+  int32 total_copies = 8;
+  string location = 9;
+}
+
+// Update book request
+message UpdateBookRequest {
+  string id = 1;
+  string title = 2;
+  string author = 3;
+  string isbn = 4;
+  string publisher = 5;
+  int32 publication_year = 6;
+  string genre = 7;
+  string description = 8;
+  int32 total_copies = 9;
+  string location = 10;
+}
+
+// Get book request
+message GetBookRequest {
+  string id = 1;
+}
+
+// List books request
+message ListBooksRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string search = 3;
+  string genre = 4;
+  string author = 5;
+}
+
+// List books response
+message ListBooksResponse {
+  repeated Book books = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+// Delete book request
+message DeleteBookRequest {
+  string id = 1;
+}
+
+// Empty response
+message Empty {}
+
+// Book service definition
+service BookService {
+  rpc CreateBook(CreateBookRequest) returns (Book);
+  rpc GetBook(GetBookRequest) returns (Book);
+  rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
+  rpc UpdateBook(UpdateBookRequest) returns (Book);
+  rpc DeleteBook(DeleteBookRequest) returns (Empty);
+} 

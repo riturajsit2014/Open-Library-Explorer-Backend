@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": false,
+    "tsConfigPath": "tsconfig.json",
+    "assets": [
+      {
+        "include": "proto/**/*.proto",
+        "watchAssets": true,
+        "outDir": "dist/src"
+      }
+    ]
+  },
+  "projects": {
+    "grpc": {
+      "type": "application",
+      "root": "src",
+      "entryFile": "grpc/main",
+      "sourceRoot": "src",
+      "compilerOptions": {
+        "tsConfigPath": "tsconfig.json",
+        "assets": [
+          {
+            "include": "proto/**/*.proto",
+            "watchAssets": true,
+            "outDir": "dist/src"
+          }
+        ]
+      }
+    }
+  }
+} 
